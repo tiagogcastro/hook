@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components'
-import { Videos, Home, Group } from '@styles/GlobalIcons'
+import styled from 'styled-components'
+
 
 export const Container = styled.div`
    width: 100px;
@@ -48,18 +48,4 @@ export const Link = styled.a`
    @media (max-width: 900px) {
       display: none;
    }
-`
-const styIcon = css`
-   width: 20px;
-   height: 20px;
-   color: var(--rgba-0);
-`
-export const HomeIcon = styled(Home)`
-   ${styIcon}
-`
-export const GroupsIcon = styled(Group)`
-   ${styIcon}
-`
-export const VideosIcon = styled(Videos)`
-   ${styIcon}
 `

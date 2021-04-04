@@ -15,7 +15,7 @@ import {
    UsersOnWrapper,
    UsersOnBar,
    UserShow,
-} from './sSideBar'
+} from './styles'
 interface IUser {
    login: string
 }

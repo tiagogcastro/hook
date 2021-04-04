@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { Comment, SuitHeartFill, ShareFill } from '@styles/GlobalIcons'
 export const Container = styled.div`
     flex-direction: column;
     width: 100%;
@@ -77,18 +76,4 @@ export const Data = styled.div`
     }
 `
 
-const styleIcon = css`
-    width: 20px;
-    height: 20px;
-    color: var(--rgba-0);
-`
 
-export const LikeIcon = styled(SuitHeartFill)`
-    ${styleIcon}
-`
-export const CommentIcon = styled(Comment)`
-    ${styleIcon}
-`
-export const ShareIcon = styled(ShareFill)`
-    ${styleIcon}
-`
