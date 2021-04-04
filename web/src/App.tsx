@@ -1,5 +1,5 @@
-import { GlobalStyle } from '@styles/GlobalStyle'
-import AppRoutes from '@routes/app.routes'
+import { GlobalStyle } from './styles/GlobalStyle'
+import AppRoutes from './routes/app.routes'
 // useRef,
 // useMemo,
 // useState,

@@ -1,1 +1,1 @@
-export const IsAuthenticate = () => localStorage.getItem('token')
+export const IsAuthenticate = () => true
