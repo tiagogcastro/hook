@@ -1,4 +1,4 @@
-# Project create by Marcos Proença
+## Project create by Marcos Proença
 
 ## Before you start, download the dependencies | **`yarn`**
 
@@ -6,18 +6,19 @@
 
 -   desktop
 
-    ![layout-desktop](./public/Assets/img/layout-desktop.png)
+    ![layout-desktop](./.github/desktop.png)
 
 -   mobile
 
 
-    ![layout-mobile](./public/Assets/img/layout-mobile.png)
+    ![layout-mobile](./.github/mobile.png)
 
 **Technologies used:**
 
--   HTML
--   CSS
+-   ReactJS
 -   TypeScript
+-   ESLint
+-   Prettier
 -   git
 -   yarn
 

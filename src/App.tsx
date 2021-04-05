@@ -1,5 +1,3 @@
-import { GlobalStyle } from './styles/GlobalStyle'
-import AppRoutes from './routes/app.routes'
 // useRef,
 // useMemo,
 // useState,
@@ -8,15 +6,17 @@ import AppRoutes from './routes/app.routes'
 // useReducer,
 // useCallback,
 // useImperativeHandle,
-import React from 'react'
+import React from 'react';
+import AppRoutes from './routes/app.routes';
+import GlobalStyle from './styles/GlobalStyle';
 
 const App: React.FC = (): JSX.Element => {
-   return (
-      <>
-         <GlobalStyle />
-         <AppRoutes />
-      </>
-   )
-}
+  return (
+    <>
+      <GlobalStyle />
+      <AppRoutes />
+    </>
+  );
+};
 
-export default App
+export default App;
