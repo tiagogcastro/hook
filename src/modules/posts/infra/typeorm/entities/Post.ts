@@ -3,22 +3,23 @@ import {
   CreateDateColumn, 
   Entity, 
   JoinColumn, 
-  ManyToMany, 
-  PrimaryColumn, 
+  ManyToOne, 
+  PrimaryGeneratedColumn, 
   UpdateDateColumn 
 } from 'typeorm';
 
-import User from './User';
+import User from '../../../../users/infra/typeorm/entities/User';
+// import User from '@modules/users/infra/typeorm/entities/User';
 
 @Entity('posts')
 class Post {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn('uuid')
   readonly id: string;
 
   @Column()
   user_id: string;
 
-  @ManyToMany(() => User)
+  @ManyToOne(() => User)
   @JoinColumn({
     name: 'user_id'
   })
