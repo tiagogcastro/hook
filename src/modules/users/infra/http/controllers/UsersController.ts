@@ -3,19 +3,20 @@ import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
 class UsersController {
-  async create(request: Request, response: Response): Promise<void> {
-    const { email, name, lastname, password } = request.body;
+  async create(request: Request, response: Response): Promise<Response> {
+    const { email, firstname, lastname, password, username } = request.body;
 
     const createUserService = container.resolve(CreateUserService);
 
     const user = await createUserService.execute({
       email,
-      name,
+      firstname,
       lastname,
-      password
+      password,
+      username
     });
 
-    // return response.json(user);
+    return response.json(user);
   }
 }
 
