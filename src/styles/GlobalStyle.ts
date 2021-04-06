@@ -5,6 +5,7 @@ export default createGlobalStyle`
 		margin: 0;
 		padding: 0;
 		outline: 0;
+    border: 0;
 		appearance: none;
 		box-sizing: border-box;
 		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
@@ -22,4 +23,10 @@ export default createGlobalStyle`
 		width: 100%;
 		height: 100vh;
 	}
+  button {
+    cursor: pointer;
+    * {
+      pointer-events: none;
+    }
+  }
 `;
