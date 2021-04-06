@@ -10,14 +10,15 @@ public async up(queryRunner: QueryRunner): Promise<void> {
 				type: 'uuid',
 				isPrimary: true,
 				generationStrategy: 'uuid',
+				default: 'uuid_generate_v4()'
 			},
 			{
-				name: 'fistname',
-				type: 'varchar',
+				name: 'firstname',
+				type: 'varchar'
 			},
 			{
 				name: 'lastname',
-				type: 'varchar',
+				type: 'varchar'
 			},
 			{
 				name: 'email',
@@ -31,16 +32,18 @@ public async up(queryRunner: QueryRunner): Promise<void> {
 			},
 			{
 				name: 'password',
-				type: 'varchar',
+				type: 'varchar'
 			},
 			{
 				name: 'user_avatar',
 				type: 'varchar',
+				isNullable: true,
 			},
 			{
 				name: 'covers',
 				type: 'varchar',
-				isArray: true,
+				isNullable: true,
+				isArray: true
 			},
 			{
 				name: 'created_at',

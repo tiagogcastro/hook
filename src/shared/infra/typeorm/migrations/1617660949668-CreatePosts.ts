@@ -11,6 +11,7 @@ public async up(queryRunner: QueryRunner): Promise<void> {
 				type: 'uuid',
 				isPrimary: true,
 				generationStrategy: 'uuid',
+				default: 'uuid_generate_v4()',
 			},
 			{
 				name: 'user_id',
@@ -19,6 +20,7 @@ public async up(queryRunner: QueryRunner): Promise<void> {
 			{
 				name: 'description',
 				type: 'varchar',
+				isNullable: true
 			},
 			{
 				name: 'content',
