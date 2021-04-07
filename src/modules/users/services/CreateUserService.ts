@@ -1,4 +1,6 @@
+import auth from '@config/auth';
 import AppError from '@shared/errors';
+import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import IUsersRepository from '../repositories/IUsersRepository';
@@ -10,13 +12,19 @@ interface IRequest {
   password: string;
   username: string;
 }
+
+interface IDataReturn {
+  user: User;
+  token: string;
+}
+
 @injectable()
 class CreateUserService {
   constructor (
     @inject('UsersRepository')
     private usersRepository: IUsersRepository
   ) {}
-  async execute({email, firstname, lastname, password, username}: IRequest): Promise<User> {
+  async execute({email, firstname, lastname, password, username}: IRequest): Promise<IDataReturn> {
     const existEmail = await this.usersRepository.findByEmail(email);
 
     if(existEmail) {
@@ -37,7 +45,18 @@ class CreateUserService {
       username: `@${username}`
     });
 
-    return user
+    const { secret } = auth.jwt;
+
+    const token = sign({
+    }, secret, {
+      subject: user.id,
+      expiresIn: 86400000,
+    });
+
+    return {
+      user,
+      token
+    }
   }
 }
 
