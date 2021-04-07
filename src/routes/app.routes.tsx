@@ -1,23 +1,22 @@
 import { ToggleThemeContext } from 'contexts/ToggleThemeProvider';
-import { createBrowserHistory } from 'history';
 import React, { useContext } from 'react';
-import { Router, Switch } from 'react-router-dom';
+import { BrowserRouter, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
+import GlobalStyle from 'styles/GlobalStyle';
 import Home from '../pages/Home';
 import PrivateRoute from './private.routes';
-
-export const history = createBrowserHistory();
 
 const AppRoutes: React.FC = (): JSX.Element => {
   const { theme } = useContext(ToggleThemeContext);
   return (
-    <Router history={history}>
+    <BrowserRouter>
       <ThemeProvider theme={theme}>
+        <GlobalStyle />
         <Switch>
           <PrivateRoute path="/" component={Home} />
         </Switch>
       </ThemeProvider>
-    </Router>
+    </BrowserRouter>
   );
 };
 

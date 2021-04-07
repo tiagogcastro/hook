@@ -3,25 +3,38 @@ import { DefaultTheme } from 'styled-components';
 export default {
   title: 'light',
   colors: {
-    primary: '#ddd',
-    switch: {
+    text: '#222',
+    primary: '#f8f9fa',
+    secondary: '#dee2e6',
+    hover: {
+      primary: '#CCCFD5'
+    },
+    searchbar: {
+      primary: '#fff'
+    },
+    scrollbar: {
+      primary: '#ECECEC',
+      secondary: '#CDCFD4'
+    },
+    icons: {
       primary: '#fff',
-      secondary: '#fff',
+      ternary: '#ddd'
+    },
+
+    switch: {
       shadow: {
-        type1: '#fff',
-        type2: '#fff',
-        type3: '#fff',
+        primary: '#fff',
+        secondary: '#fff',
+        ternary: '#dee2e6'
       },
       background: {
-        type1: '#fff',
-        type2: '#fff',
-        type3: '#fff',
+        primary: '#fff'
       },
       border: {
-        type1: '#fff',
-        type2: '#fff',
-        type3: '#fff',
-      },
-    },
-  },
+        primary: '#c3c3c370',
+        secondary: '#fbfbfb',
+        ternary: '#fff'
+      }
+    }
+  }
 } as DefaultTheme;
