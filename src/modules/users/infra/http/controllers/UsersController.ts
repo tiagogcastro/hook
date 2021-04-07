@@ -1,4 +1,5 @@
 import CreateUserService from '@modules/users/services/CreateUserService';
+import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -8,7 +9,7 @@ class UsersController {
 
     const createUserService = container.resolve(CreateUserService);
 
-    const user = await createUserService.execute({
+    const {user, token} = await createUserService.execute({
       email,
       firstname,
       lastname,
@@ -16,8 +17,20 @@ class UsersController {
       username
     });
 
+    return response.json({user, token});
+  }
+  async updateAvatar(request: Request, response: Response): Promise<Response> {
+    const updateUserAvatar = container.resolve(UpdateUserAvatarService);
+    const userId = request.user.id;
+    const avatarFilename = request.file.filename;
+
+    const user = await updateUserAvatar.execute({
+      userId,
+      avatarFilename
+    });
+
     return response.json(user);
   }
-}
+} 
 
 export default UsersController;
