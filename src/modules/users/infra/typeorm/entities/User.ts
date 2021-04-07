@@ -18,7 +18,7 @@ class User {
   lastname: string;
 
   @Column()
-  email: string;;
+  email: string;
 
   @Column()
   username: string;
@@ -37,7 +37,6 @@ class User {
   
   @UpdateDateColumn()
   updated_at: Date;
-
 }
 
 export default User;
