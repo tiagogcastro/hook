@@ -4,24 +4,38 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     title: string;
     colors: {
+      text: string;
       primary: string;
-      switch: {
+      secondary: string;
+      hover: {
+        primary: string;
+      };
+      searchbar: {
+        primary: string;
+      };
+
+      scrollbar: {
         primary: string;
         secondary: string;
+      };
+      icons: {
+        primary: string;
+        ternary: string;
+      };
+      switch: {
+        primary: string;
         shadow: {
-          type1: string;
-          type2: string;
-          type3: string;
+          primary: string;
+          secondary: string;
+          ternary: string;
         };
         background: {
-          type1: string;
-          type2: string;
-          type3: string;
+          primary: string;
         };
         border: {
-          type1: string;
-          type2: string;
-          type3: string;
+          primary: string;
+          secondary: string;
+          ternary: string;
         };
       };
     };
