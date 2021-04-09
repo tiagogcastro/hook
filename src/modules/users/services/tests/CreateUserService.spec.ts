@@ -45,9 +45,9 @@ describe('CreateUser', () => {
   });
 
   it('Should not be able to create a new user with same username from another', async () => {
-    const fakeUsersRepository = new FakeUsersRepository()
-    const fakeHashProvider = new FakeHashProvider()
-
+    const fakeUsersRepository = new FakeUsersRepository();
+    const fakeHashProvider = new FakeHashProvider();
+    
     const createUser = new CreateUserService(fakeUsersRepository, fakeHashProvider);
 
     await createUser.execute({
