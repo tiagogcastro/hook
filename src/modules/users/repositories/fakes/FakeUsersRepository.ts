@@ -29,7 +29,7 @@ class FakeUsersRepository implements IUsersRepository{
   }
 
   async findByUsername(username: string): Promise<User | undefined> {
-    const user = this.users.find(user => user.username === username);
+    const user = this.users.find(user => user.username === `@${username}`);
     
     return user;
   }
