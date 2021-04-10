@@ -1,5 +1,7 @@
 import CreateUserService from '@modules/users/services/CreateUserService';
-import UpdateUserAvatarService from '@modules/users/services/UpdateUserAvatarService';
+import DeleteUserService from '@modules/users/services/DeleteUserService';
+import ShowUserService from '@modules/users/services/ShowUserService';
+import UpdateUserService from '@modules/users/services/UpdateUserService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -19,15 +21,41 @@ class UsersController {
 
     return response.json({user, token});
   }
-  async updateAvatar(request: Request, response: Response): Promise<Response> {
-    const updateUserAvatar = container.resolve(UpdateUserAvatarService);
-    const userId = request.user.id;
-    const avatarFilename = request.file.filename;
 
-    const user = await updateUserAvatar.execute({
-      userId,
-      avatarFilename
+  async update(request: Request, response: Response): Promise<Response> {
+    const { email, firstname, lastname, username } = request.body;
+    const id = request.user.id;
+
+    const updateUserService = container.resolve(UpdateUserService);
+
+    const user = await updateUserService.execute({
+      id,
+      email,
+      firstname,
+      lastname,
+      username,
+
     });
+
+    return response.json(user);
+  }
+
+  async show(request: Request, response: Response): Promise<Response> {
+    const id = request.user.id;
+
+    const showUserService = container.resolve(ShowUserService);
+
+    const user = await showUserService.execute(id);
+
+    return response.json(user);
+  }
+
+  async delete(request: Request, response: Response): Promise<Response> {
+    const id = request.user.id;
+
+    const deleteUserService = container.resolve(DeleteUserService);
+
+    const user = await deleteUserService.execute(id);
 
     return response.json(user);
   }
