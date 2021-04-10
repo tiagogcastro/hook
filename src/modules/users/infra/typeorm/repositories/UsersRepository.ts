@@ -1,4 +1,5 @@
 import ICreateUserDto from '@modules/users/dtos/ICreateUserDTO';
+import IUpdateUserDto from '@modules/users/dtos/IUpdateUserDTO';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import { getRepository, Repository } from 'typeorm';
 import User from '../entities/User';
@@ -18,6 +19,25 @@ class UsersRepository implements IUsersRepository{
     await this.ormRepository.save(user);
 
     return user;
+  }
+
+  async update(id: string, userData: IUpdateUserDto): Promise<User | undefined> {
+    const user = await this.ormRepository.update(id, userData);
+
+    if(user.affected === 1) {
+      const userUpdated = await this.ormRepository.findOne(id);
+      return userUpdated
+    }
+  }
+
+  async show(id: string): Promise<User | undefined> {
+    const user = await this.ormRepository.findOne(id);
+    
+    return user;
+  }
+
+  async delete(id: string): Promise<void> {
+    await this.ormRepository.delete(id);
   }
 
   async findByEmail(email: string): Promise<User | undefined> {
