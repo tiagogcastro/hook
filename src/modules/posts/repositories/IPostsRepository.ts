@@ -12,8 +12,6 @@ export default interface IPostsRepository {
 
   // save(user: User): Promise<User>;
   
-  // findByEmail(email: string): Promise<User | undefined>;
-  // findByUsername(username: string): Promise<User | undefined>;
+  findAll(user_id: string): Promise<Post[]>;
   findByid(id: string): Promise<Post | undefined>;
-
 }

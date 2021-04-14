@@ -6,10 +6,10 @@ import Post from '../entities/Post';
 // Criando os metodos do user usando typeorm
 
 class PostsRepository implements IPostRepository{
-  private ormRepository: Repository<Post>
+  private ormRepository: Repository<Post>;
 
   constructor() {
-    this.ormRepository = getRepository(Post)
+    this.ormRepository = getRepository(Post);
   }
 
   async create(postData: ICreatePostDto): Promise<Post> {
@@ -37,6 +37,16 @@ class PostsRepository implements IPostRepository{
 
   async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id);
+  }
+
+   async findAll(user_id: string): Promise<Post[]> {
+    const post = await this.ormRepository.find({
+      where: {
+        user_id
+      }
+    })
+
+    return post
   }
 
   async findByid(id: string): Promise<Post | undefined> {
