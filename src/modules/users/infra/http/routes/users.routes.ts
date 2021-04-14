@@ -23,4 +23,8 @@ usersRouter.patch('/avatar',
   upload.single('avatar'),
   usersAvatarController.update);
 
+usersRouter.post('/covers',
+  ensureAuthenticated, 
+  upload.array('covers', 4), (request) => console.log(request.files));
+
 export default usersRouter;
