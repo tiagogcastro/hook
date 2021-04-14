@@ -41,13 +41,12 @@ class UsersController {
   }
 
   async show(request: Request, response: Response): Promise<Response> {
-    const id = request.user.id;
-
+    const {id} = request.params;
     const showUserService = container.resolve(ShowUserService);
 
-    const user = await showUserService.execute(id);
+    const {user, posts, totalPosts} = await showUserService.execute(id);
 
-    return response.json(user);
+    return response.json({user, posts, totalPosts});
   }
 
   async delete(request: Request, response: Response): Promise<Response> {
