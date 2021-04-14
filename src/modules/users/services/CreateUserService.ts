@@ -33,13 +33,13 @@ class CreateUserService {
     const existEmail = await this.usersRepository.findByEmail(email);
 
     if(existEmail) {
-      throw new AppError('Este e-mail já existe. Por favor, informe outro', ' 401 unauthorized', 401);
+      throw new AppError('Este e-mail já existe. Por favor, informe outro', '401 unauthorized', 401);
     }
 
     const existUsername = await this.usersRepository.findByUsername(username);
 
     if(existUsername) {
-      throw new AppError('Este username já existe. Por favor, informe outro', ' 401 unauthorized', 401);
+      throw new AppError('Este username já existe. Por favor, informe outro', '401 unauthorized', 401);
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);

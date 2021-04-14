@@ -21,7 +21,7 @@ class UpdateUserService {
     const user = await this.usersRepository.findByid(id);
 
     if(!user) {
-      throw new AppError('Você não está logado para atualizar as informações', ' 401 unauthorized', 401);
+      throw new AppError('Você não está logado para atualizar as informações', '401 unauthorized', 401);
     }
 
     const updateUser = await this.usersRepository.update(id, {

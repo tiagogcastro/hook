@@ -30,13 +30,13 @@ class AuthenticateUserService {
     const user = await this.usersRepository.findByEmail(email);
     
     if(!user) {
-      throw new AppError('Está conta não existe.', ' 401 unauthorized', 401);
+      throw new AppError('Está conta não existe.', '401 unauthorized', 401);
     }
 
     const passwordMatched = await this.hashProvider.compareHash(password, user.password);
 
     if(!passwordMatched) {
-      throw new AppError('Senha ou e-mail incorreto', ' 401 unauthorized', 401); 
+      throw new AppError('Senha ou e-mail incorreto', '401 unauthorized', 401); 
     }
 
     const { secret } = auth.jwt;

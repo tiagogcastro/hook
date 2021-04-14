@@ -22,7 +22,7 @@ class UpdateUserAvatarService{
 		
 		const user = await this.usersRepository.findByid(userId)
 
-		if (!user) throw new AppError('Only autheticated users can change avatar.',' 401 unauthorized', 401)
+		if (!user) throw new AppError('Only autheticated users can change avatar.','401 unauthorized', 401)
 
 		if (user.user_avatar) {
 			await this.storageProvider.deleteFile(user.user_avatar);

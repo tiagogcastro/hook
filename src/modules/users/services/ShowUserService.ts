@@ -13,7 +13,7 @@ class ShowUserService {
     const user = await this.usersRepository.show(id);
 
     if(!user) {
-      throw new AppError('Você não está logado.', ' 401 unauthorized', 401);
+      throw new AppError('Você não está logado.', '401 unauthorized', 401);
     }
 
     return user;
