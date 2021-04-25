@@ -22,7 +22,7 @@ class ShowUserService {
   ) {}
   async execute(id: string): Promise<IDataReturn> {
     const user = await this.usersRepository.show(id);
-    const posts = await this.postsRepository.findAll(id);
+    const posts = await this.postsRepository.findAll_OneUser(id);
 
     if(!user) {
       throw new AppError('Este usuário não existe', '401 unauthorized', 401);
