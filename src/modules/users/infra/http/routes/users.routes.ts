@@ -15,6 +15,9 @@ const upload = multer(uploadConfig);
 
 usersRouter.post('/', usersController.create);
 usersRouter.get('/profile/:id', ensureAuthenticated, usersController.show);
+
+usersRouter.get('/feed', ensureAuthenticated, usersController.index);
+
 usersRouter.put('/', ensureAuthenticated,  usersController.update);
 usersRouter.delete('/', ensureAuthenticated,  usersController.delete);
 
