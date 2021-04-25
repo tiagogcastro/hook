@@ -29,7 +29,7 @@ class User {
   @Column()
   user_avatar: string;
   
-  @Column("varchar", { array: true })
+  @Column("varchar", { array: true})
   covers: string[];
   
   @CreateDateColumn()
