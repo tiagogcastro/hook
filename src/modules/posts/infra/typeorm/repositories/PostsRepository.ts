@@ -29,24 +29,26 @@ class PostsRepository implements IPostRepository{
   //   }
   // }
 
-  // async index(id: string): Promise<User | undefined> {
-  //   const user = await this.ormRepository.findOne(id);
-    
-  //   return user;
-  // }
-
   async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id);
   }
 
-   async findAll(user_id: string): Promise<Post[]> {
+   async findAll_OneUser(user_id: string): Promise<Post[]> {
     const post = await this.ormRepository.find({
-      where: {
-        user_id
-      }
-    })
+      where: {user_id},
+      relations: ['user']
+    });
 
-    return post
+    return post;
+  }
+
+  async findAll(): Promise<Post[]> {
+    const post = await this.ormRepository.find({
+      relations:['user'],
+      order: {created_at: 'DESC'},
+    });
+
+    return post;
   }
 
   async findByid(id: string): Promise<Post | undefined> {
@@ -56,7 +58,6 @@ class PostsRepository implements IPostRepository{
 
     return post;
   }
-
 }
 
 export default PostsRepository;
