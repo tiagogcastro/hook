@@ -31,7 +31,10 @@ class UsersRepository implements IUsersRepository{
   }
 
   async show(id: string): Promise<User | undefined> {
-    const user = await this.ormRepository.findOne(id);
+    const user = await this.ormRepository.createQueryBuilder('user')
+    .addSelect(['user.password', 'user.covers'])
+    .where("user.id = :id", { id })
+    .getOne()
     
     return user;
   }
@@ -42,7 +45,7 @@ class UsersRepository implements IUsersRepository{
 
   async findByEmail(email: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
-      where: {email}
+      where: {email},
     });
 
     return user;
@@ -67,6 +70,12 @@ class UsersRepository implements IUsersRepository{
     return this.ormRepository.save(user);
   }
 
+  public async findAll(): Promise<User[]> {
+    const users = await this.ormRepository.find();
+    
+    return users;
+  }
+  
 }
 
 export default UsersRepository;
