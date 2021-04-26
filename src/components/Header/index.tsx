@@ -1,75 +1,91 @@
+import Avatar from 'components/Avatar';
 import Centralize from 'components/Centralize';
 import Switch from 'components/Switch';
-import { ToggleThemeContext } from 'contexts/ToggleThemeProvider';
-import React, { useContext } from 'react';
+import React from 'react';
 import {
-  BiChat,
-  HiHome,
   IoSearchOutline,
-  MdVideoLibrary,
-  TiGroup
+  CgHomeScreen,
+  TiGroup,
+  FaPhotoVideo,
+  IoNotificationsOutline,
+  GoTriangleDown,
+  FiMessageCircle
 } from 'react-icons/all';
-import { Link } from 'react-router-dom';
+import { useTheme } from 'styled-components';
 import {
-  Box,
   Container,
-  LayerLeft,
-  LayerMiddle,
-  LayerRight,
-  Layers,
-  SearchBar
+  Rearrange,
+  Research,
+  Navigation,
+  Information,
+  UserProfileButton,
+  Encapsulate,
+  Link
 } from './styles';
 
-const Header: React.FC = (): JSX.Element => {
-  const { theme } = useContext(ToggleThemeContext);
-
+const Header: React.FC = () => {
+  const {
+    colors: {
+      texts: { primary: textColorPrimary },
+      icons: { primary: iconColorPrimary }
+    }
+  } = useTheme();
   return (
     <Container>
       <Centralize>
-        <Layers>
-          <LayerLeft>
-            <button type="button">
-              <IoSearchOutline size={25} color={theme.colors.icons.primary} />
+        <Rearrange>
+          <Research>
+            <button type="submit">
+              <IoSearchOutline color={iconColorPrimary} size={20} />
             </button>
-            <SearchBar>
-              <input type="text" />
-            </SearchBar>
-          </LayerLeft>
-          <LayerMiddle>
-            <nav>
-              <ul>
-                <li>
-                  <Link to="/">
-                    <HiHome size={25} color={theme.colors.icons.primary} />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/groups">
-                    <TiGroup size={25} color={theme.colors.icons.primary} />
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/watch">
-                    <MdVideoLibrary
-                      size={25}
-                      color={theme.colors.icons.primary}
-                    />
-                  </Link>
-                </li>
-              </ul>
-            </nav>
-          </LayerMiddle>
-          <LayerRight>
-            <Box>
-              <Link to="/messages">
-                <BiChat size={30} color={theme.colors.icons.primary} />
-              </Link>
-            </Box>
-            <Box>
-              <Switch />
-            </Box>
-          </LayerRight>
-        </Layers>
+            <input type="search" />
+          </Research>
+
+          <Navigation>
+            <ul>
+              <li>
+                <Link active to="/">
+                  <CgHomeScreen color={iconColorPrimary} size={30} />
+                  <span />
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <TiGroup color={iconColorPrimary} size={30} />
+                  <span />
+                </Link>
+              </li>
+              <li>
+                <Link to="/">
+                  <FaPhotoVideo color={iconColorPrimary} size={30} />
+                  <span />
+                </Link>
+              </li>
+            </ul>
+          </Navigation>
+
+          <Information>
+            <UserProfileButton to="/">
+              <Avatar size={30} />
+              <span>@username</span>
+            </UserProfileButton>
+
+            <Encapsulate>
+              <button type="button">
+                <FiMessageCircle color={textColorPrimary} size={20} />
+              </button>
+
+              <button type="button">
+                <IoNotificationsOutline color={textColorPrimary} size={20} />
+              </button>
+
+              <button type="button">
+                <GoTriangleDown color={textColorPrimary} size={20} />
+              </button>
+            </Encapsulate>
+            <Switch />
+          </Information>
+        </Rearrange>
       </Centralize>
     </Container>
   );
