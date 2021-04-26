@@ -1,7 +1,7 @@
 import usePersistedState from 'hooks/usePersistedState';
 import React, { createContext } from 'react';
 import { DefaultTheme } from 'styled-components';
-import light from 'themes/light';
+import dark from 'themes/dark';
 
 interface IToggleThemeContext {
   setTheme: (themes: DefaultTheme) => void;
@@ -12,7 +12,7 @@ export const ToggleThemeContext = createContext<IToggleThemeContext>(
 );
 
 const ToggleThemeProvider: React.FC = ({ children }): JSX.Element => {
-  const [theme, setTheme] = usePersistedState('theme', light);
+  const [theme, setTheme] = usePersistedState('theme', dark);
 
   return (
     <ToggleThemeContext.Provider value={{ setTheme, theme }}>
