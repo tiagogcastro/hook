@@ -1,8 +1,5 @@
-// useRef,
 // useMemo,
 // useReducer,
-// useCallback,
-// useImperativeHandle,
 import ToggleThemeProvider from 'contexts/ToggleThemeProvider';
 import React from 'react';
 import AppRoutes from 'routes/app.routes';
