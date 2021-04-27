@@ -1,39 +1,50 @@
 import { DefaultTheme } from 'styled-components';
+import { shade, tint } from 'polished';
 
 export default {
   title: 'light',
   colors: {
-    text: '#222',
-    primary: '#f8f9fa',
-    secondary: '#dee2e6',
+    texts: {
+      primary: '#555A62'
+    },
+    inputs: {
+      primary: '#F6FAFF'
+    },
+    avatar: shade(0.01, '#CDD2D8'),
+    background: {
+      primary: '#f8f9fa',
+      secondary: '#CDD2D8'
+    },
     hover: {
-      primary: '#CCCFD5'
+      primary: '#B3B8C0'
     },
     searchbar: {
-      primary: '#fff'
+      primary: '#F6FAFF'
     },
     scrollbar: {
       primary: '#ECECEC',
       secondary: '#CDCFD4'
     },
     icons: {
-      primary: '#fff',
-      ternary: '#ddd'
+      primary: '#F6FAFF',
+      ternary: '#892753',
+      background: {
+        primary: '#F6FAFF'
+      }
     },
-
     switch: {
       shadow: {
-        primary: '#fff',
-        secondary: '#fff',
-        ternary: '#dee2e6'
+        primary: tint(0.65, '#892753'),
+        secondary: '#F6FAFF',
+        ternary: shade(0.07, '#dee2e6')
       },
       background: {
-        primary: '#fff'
+        primary: '#F6FAFF'
       },
       border: {
-        primary: '#c3c3c370',
+        primary: tint(0.65, '#892753'),
         secondary: '#fbfbfb',
-        ternary: '#fff'
+        ternary: '#F6FAFF'
       }
     }
   }

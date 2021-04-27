@@ -4,12 +4,21 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     title: string;
     colors: {
-      text: string;
-      primary: string;
-      secondary: string;
+      texts: {
+        primary: string;
+      };
+      inputs: {
+        primary: string;
+      };
+      background: {
+        primary: string;
+        secondary: string;
+      };
+      avatar: string;
       hover: {
         primary: string;
       };
+
       searchbar: {
         primary: string;
       };
@@ -21,7 +30,11 @@ declare module 'styled-components' {
       icons: {
         primary: string;
         ternary: string;
+        background: {
+          primary: string;
+        };
       };
+
       switch: {
         primary: string;
         shadow: {
