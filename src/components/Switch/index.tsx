@@ -1,6 +1,6 @@
 import { ToggleThemeContext } from 'contexts/ToggleThemeProvider';
 import React, { useContext } from 'react';
-import { AiOutlinePoweroff } from 'react-icons/ai';
+import { RiMoonClearLine, FiSun } from 'react-icons/all';
 import dark from 'themes/dark';
 import light from 'themes/light';
 import { Ball, Container, Wrapper } from './styles';
@@ -18,7 +18,11 @@ const Switch: React.FC = (): JSX.Element => {
     <Container title="Mudar tema">
       <Wrapper onClick={handleClick}>
         <Ball>
-          <AiOutlinePoweroff size={50} color={theme.colors.icons.ternary} />
+          {theme.title === 'dark' ? (
+            <FiSun size={50} color={theme.colors.icons.ternary} />
+          ) : (
+            <RiMoonClearLine size={60} color={theme.colors.icons.ternary} />
+          )}
         </Ball>
       </Wrapper>
     </Container>

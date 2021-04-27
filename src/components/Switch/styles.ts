@@ -1,9 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
+  flex-shrink: 0;
+  position: relative;
+  z-index: 2;
   user-select: none;
-  width: 100%;
-  max-width: 50px;
+  width: 50px;
 `;
 export const Wrapper = styled.button`
   position: relative;

@@ -8,7 +8,8 @@ export default createGlobalStyle`
     border: 0;
 		appearance: none;
 		box-sizing: border-box;
-		font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-weight: 500;
+		font-family: 'Heebo', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
       scrollbar-color:
       ${props => `
       ${props.theme.colors.scrollbar.secondary}
@@ -33,10 +34,27 @@ export default createGlobalStyle`
 		min-height: 100vh;
 		position: fixed;
 		overflow: hidden;
-	}
 
+	}
+  input {
+    background-color: ${props => props.theme.colors.inputs.primary};
+  }
+  a, input, button {
+    font-weight: bold;
+    color: ${props => props.theme.colors.texts.primary};
+  }
+  a {
+    display: block;
+    text-decoration: none;
+  }
+  button {
+    background-color: transparent;
+    * {
+      pointer-events: none;
+    }
+  }
 	body {
-    background-color: ${props => props.theme.colors.primary};
+    background-color: ${props => props.theme.colors.background.primary};
 		width: 100%;
 		height: 100vh;
 	}

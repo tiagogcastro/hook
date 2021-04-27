@@ -19,9 +19,13 @@ export const Rearrange = styled.div`
 `;
 export const Research = styled.div`
   ${cssFlex}
+
+  button {
+    height: 20px;
+    overflow: hidden;
+  }
   > input {
     margin-left: 15px;
-
     width: 200px;
     padding: 5px;
     border-radius: 50rem;
@@ -29,21 +33,43 @@ export const Research = styled.div`
 `;
 export const Navigation = styled.nav`
   ${cssFlex}
+  background-color: ${props => props.theme.colors.background.secondary};
   height: 100%;
   * {
-    height: 100%;
+    height: unset;
   }
   > ul {
-    display: flex;
-
+    ${cssFlex}
     list-style: none;
+    width: 100%;
+    flex-direction: column;
     li {
       padding: 10px 0;
-      margin: 0 15px;
+      > a {
+        ${cssFlex}
+        justify-content: center;
+        padding: 10px;
+        margin: 0 15px;
+      }
+    }
+  }
+
+  width: 80px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  @media screen and (max-width: 830px) {
+    width: 100%;
+    height: unset;
+    > ul {
+      justify-content: space-around;
+      flex-direction: row;
+    }
+    * {
+      height: 100%;
     }
   }
 `;
-
 // eslint-disable-next-line prettier/prettier
 export const Link = styled(LinkReactDOM) <LinkProps>`
   border-radius: 7px;
@@ -87,12 +113,15 @@ export const UserProfileButton = styled(LinkReactDOM)`
     line-height: 0;
     margin-left: 10px;
   }
+  @media screen and (max-width: 830px) {
+    display: none;
+  }
 `;
 
 export const Encapsulate = styled.div`
   ${cssFlex}
   margin-right: 10px;
-  button {
+  > button {
     ${cssFlex}
     justify-content: center;
     margin: 0 3px;
