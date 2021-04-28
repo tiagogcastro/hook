@@ -2,16 +2,18 @@ import styled, { css } from 'styled-components';
 import { Link as LinkReactDOM } from 'react-router-dom';
 
 interface LinkProps {
-  active: string;
+  isActive: boolean;
 }
-// eslint-disable-next-line prettier/prettier
-export const Container = styled(LinkReactDOM) <LinkProps>`
+
+export const Container = styled(LinkReactDOM)`
   border-radius: 7px;
   padding: 0 10px;
   position: relative;
   &:hover {
     background-color: ${props => props.theme.colors.hover.primary};
   }
+`;
+export const NavigationAnchor = styled.div<LinkProps>`
   span {
     border-radius: 50%;
     left: 0;
@@ -23,7 +25,7 @@ export const Container = styled(LinkReactDOM) <LinkProps>`
     transition: 400ms ease-in-out background-color;
   }
   ${props =>
-    props.active &&
+    props.isActive &&
     css`
       span {
         background-color: ${props.theme.colors.icons.ternary};
