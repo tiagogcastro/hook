@@ -1,9 +1,16 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
-export const Container = styled.div`
+interface ContainerProps {
+  isDefault: boolean;
+}
+export const Container = styled.div<ContainerProps>`
   padding: 0 3%;
-  padding-left: 115px;
-  @media screen and (max-width: 830px) {
+  ${props =>
+    props.isDefault &&
+    css`
+      padding-left: 115px;
+    `}
+  @media screen and (max-width: 900px) {
     padding-left: 3%;
   }
   margin: 0 auto;
