@@ -1,7 +1,7 @@
 import React from 'react';
 import { IconBaseProps } from 'react-icons/lib';
 import { LinkProps } from 'react-router-dom';
-import { Container } from './styles';
+import { Container, NavigationAnchor } from './styles';
 
 interface AnchorProps extends LinkProps {
   color?: string;
@@ -20,13 +20,11 @@ const Anchor: React.FC<AnchorProps> = ({
   ...rest
 }) => {
   return (
-    <Container
-      to={to}
-      active={active === undefined || active === false ? '' : 'true'}
-      {...rest}
-    >
-      <Icon {...r} />
-      <span />
+    <Container to={to} {...rest}>
+      <NavigationAnchor isActive={!!active}>
+        <Icon {...r} />
+        <span />
+      </NavigationAnchor>
     </Container>
   );
 };
