@@ -1,10 +1,9 @@
-/* eslint-disable prettier/prettier */
 import Anchor from 'components/Anchor';
 import Avatar from 'components/Avatar';
 import Converge from 'components/Converge';
-import Modal, { ModalHandles } from 'components/Modal';
+import Modal, { ModalHandles } from 'components/ModalOverlay/Modal';
 import Switch from 'components/Switch';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import {
   CgHomeScreen,
   FaPhotoVideo,
@@ -14,6 +13,7 @@ import {
   IoSearchOutline,
   TiGroup
 } from 'react-icons/all';
+import { useLocation } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import {
   Container,
@@ -22,15 +22,19 @@ import {
   Navigation,
   Rearrange,
   Research,
+  ModalContainer,
   UserProfileButton
 } from './styles';
 
 interface AnchorIcons {
-  homeIcon?: boolean,
-  groupIcon?: boolean,
-  videoIcon?: boolean,
+  homeIcon?: boolean;
+  groupIcon?: boolean;
+  videoIcon?: boolean;
 }
-const Header: React.FC = () => {
+interface HeaderProps {
+  isDefault?: boolean;
+}
+const Header: React.FC<HeaderProps> = ({ isDefault = false }) => {
   const {
     colors: {
       texts: { primary: textColorPrimary },
@@ -38,35 +42,62 @@ const Header: React.FC = () => {
     }
   } = useTheme();
   const [isActive, setIsActive] = useState<AnchorIcons>({
-    homeIcon: true,
+    homeIcon: false,
     groupIcon: false,
-    videoIcon: false,
+    videoIcon: false
   });
 
-  const messageModalRef = useRef<ModalHandles>(null)
-  const notificationModalRef = useRef<ModalHandles>(null)
-  const triangleDownModalRef = useRef<ModalHandles>(null)
+  const { pathname } = useLocation();
+  useEffect(() => {
+    switch (pathname) {
+      case '/':
+        setIsActive({
+          homeIcon: true
+        });
+        break;
+
+      case '/groups':
+        setIsActive({
+          groupIcon: true
+        });
+        break;
+
+      case '/watch':
+        setIsActive({
+          videoIcon: true
+        });
+        break;
+      default:
+        setIsActive({});
+        break;
+    }
+  }, [pathname]);
+
+  const messageModalRef = useRef<ModalHandles>(null);
+  const notificationModalRef = useRef<ModalHandles>(null);
+  const triangleDownModalRef = useRef<ModalHandles>(null);
 
   const handleOpenMessageModal = useCallback(() => {
-    triangleDownModalRef.current?.closeModal()
-    notificationModalRef.current?.closeModal()
-    messageModalRef.current?.openModal()
-  }, [])
+    triangleDownModalRef.current?.closeModal();
+    notificationModalRef.current?.closeModal();
+    messageModalRef.current?.openModal();
+  }, []);
 
   const handleOpenNotificationModal = useCallback(() => {
-    triangleDownModalRef.current?.closeModal()
-    messageModalRef.current?.closeModal()
-    notificationModalRef.current?.openModal()
-  }, [])
+    triangleDownModalRef.current?.closeModal();
+    messageModalRef.current?.closeModal();
+    notificationModalRef.current?.openModal();
+  }, []);
 
   const handleOpenTriangleDownModal = useCallback(() => {
-    notificationModalRef.current?.closeModal()
-    messageModalRef.current?.closeModal()
-    triangleDownModalRef.current?.openModal()
-  }, [])
+    notificationModalRef.current?.closeModal();
+    messageModalRef.current?.closeModal();
+    triangleDownModalRef.current?.openModal();
+  }, []);
+
   return (
     <Container>
-      <Converge>
+      <Converge isDefault={isDefault}>
         <Rearrange>
           <Research>
             <button type="submit">
@@ -74,53 +105,41 @@ const Header: React.FC = () => {
             </button>
             <input type="search" />
           </Research>
-          <Navigation>
+          <Navigation isDefault={isDefault}>
             <ul>
               <li>
                 <Anchor
                   to="/"
                   active={isActive.homeIcon}
-                  onClick={() => {
-                    setIsActive({
-                      homeIcon: true
-                    })
-                  }}
                   icon={{
                     component: CgHomeScreen,
                     color: iconColorPrimary,
                     size: 30
-                  }} />
+                  }}
+                />
               </li>
 
               <li>
                 <Anchor
                   to="/groups"
                   active={isActive.groupIcon}
-                  onClick={() => {
-                    setIsActive({
-                      groupIcon: true
-                    })
-                  }}
                   icon={{
                     component: TiGroup,
                     color: iconColorPrimary,
                     size: 30
-                  }} />
+                  }}
+                />
               </li>
               <li>
                 <Anchor
                   to="/watch"
                   active={isActive.videoIcon}
-                  onClick={() => {
-                    setIsActive({
-                      videoIcon: true
-                    })
-                  }}
                   icon={{
                     component: FaPhotoVideo,
                     color: iconColorPrimary,
                     size: 30
-                  }} />
+                  }}
+                />
               </li>
             </ul>
           </Navigation>
@@ -132,21 +151,24 @@ const Header: React.FC = () => {
             </UserProfileButton>
 
             <Encapsulate>
-              <Modal ref={messageModalRef}>1</Modal>
-              <button type="button" onClick={handleOpenMessageModal}>
-                <FiMessageCircle color={textColorPrimary} size={20} />
-              </button>
-
-
-              <Modal ref={notificationModalRef}>2</Modal>
-              <button type="button" onClick={handleOpenNotificationModal}>
-                <IoNotificationsOutline color={textColorPrimary} size={20} />
-              </button>
-
-              <Modal ref={triangleDownModalRef}>3</Modal>
-              <button type="button" onClick={handleOpenTriangleDownModal}>
-                <GoTriangleDown color={textColorPrimary} size={20} />
-              </button>
+              <ModalContainer>
+                <Modal ref={messageModalRef}>1</Modal>
+                <button type="button" onClick={handleOpenMessageModal}>
+                  <FiMessageCircle color={textColorPrimary} size={20} />
+                </button>
+              </ModalContainer>
+              <ModalContainer>
+                <Modal ref={notificationModalRef}>2</Modal>
+                <button type="button" onClick={handleOpenNotificationModal}>
+                  <IoNotificationsOutline color={textColorPrimary} size={20} />
+                </button>
+              </ModalContainer>
+              <ModalContainer>
+                <Modal ref={triangleDownModalRef}>3</Modal>
+                <button type="button" onClick={handleOpenTriangleDownModal}>
+                  <GoTriangleDown color={textColorPrimary} size={20} />
+                </button>
+              </ModalContainer>
             </Encapsulate>
             <Switch />
           </Information>
