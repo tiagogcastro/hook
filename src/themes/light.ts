@@ -13,7 +13,8 @@ export default {
     avatar: shade(0.01, '#CDD2D8'),
     background: {
       primary: '#f8f9fa',
-      secondary: '#CDD2D8'
+      secondary: '#CDD2D8',
+      ternary: shade(0.08, '#CDD2D8')
     },
     hover: {
       primary: '#B3B8C0'
