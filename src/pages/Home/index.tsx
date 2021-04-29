@@ -5,7 +5,7 @@ import { Body, Container } from './styles';
 const Home: React.FC = (): JSX.Element => {
   return (
     <Container>
-      <Header />
+      <Header isDefault />
       <Body>
         <div style={{ height: '1000vh' }} />
       </Body>
