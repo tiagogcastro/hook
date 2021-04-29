@@ -65,4 +65,5 @@ export default createGlobalStyle`
       pointer-events: none;
     }
   }
+
 `;
