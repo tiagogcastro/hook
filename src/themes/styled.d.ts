@@ -13,6 +13,7 @@ declare module 'styled-components' {
       background: {
         primary: string;
         secondary: string;
+        ternary: string;
       };
       avatar: string;
       hover: {
