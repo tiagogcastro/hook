@@ -12,7 +12,8 @@ export default {
     },
     background: {
       primary: '#16181E',
-      secondary: '#101115'
+      secondary: '#101115',
+      ternary: shade(0.5, '#101115')
     },
     avatar: tint(0.01, '#0a0b0c'),
     hover: {
