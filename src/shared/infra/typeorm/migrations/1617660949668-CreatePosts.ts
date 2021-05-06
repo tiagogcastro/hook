@@ -10,8 +10,6 @@ public async up(queryRunner: QueryRunner): Promise<void> {
 				name: "id",
 				type: 'uuid',
 				isPrimary: true,
-				generationStrategy: 'uuid',
-				default: 'uuid_generate_v4()',
 			},
 			{
 				name: 'user_id',
