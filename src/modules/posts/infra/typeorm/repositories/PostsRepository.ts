@@ -20,35 +20,25 @@ class PostsRepository implements IPostRepository{
     return post;
   }
 
-  // async update(id: string, userData: IUpdateUserDto): Promise<User | undefined> {
-  //   const user = await this.ormRepository.update(id, userData);
-
-  //   if(user.affected === 1) {
-  //     const userUpdated = await this.ormRepository.findOne(id);
-  //     return userUpdated
-  //   }
-  // }
-
   async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id);
   }
 
-   async findAll_OneUser(user_id: string): Promise<Post[]> {
+   async findAllByUser(user_id: string): Promise<Post[] | undefined> {
     const post = await this.ormRepository.find({
       where: {user_id},
-      relations: ['user']
     });
 
     return post;
   }
 
-  async findAll(): Promise<Post[]> {
-    const post = await this.ormRepository.find({
+  async findAll(): Promise<Post[] | undefined> {
+    const posts = await this.ormRepository.find({
       relations:['user'],
       order: {created_at: 'DESC'},
     });
 
-    return post;
+    return posts;
   }
 
   async findByid(id: string): Promise<Post | undefined> {

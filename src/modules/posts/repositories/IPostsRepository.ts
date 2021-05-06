@@ -1,18 +1,11 @@
-// Cria a interface do usuário sem depender do typeorm.
-// No typeorm só vai depender dessa interface.
-
-import User from '@modules/users/infra/typeorm/entities/User';
 import ICreatePostDto from '../dtos/ICreatePostDto';
 import Post from '../infra/typeorm/entities/Post';
 
 export default interface IPostsRepository {
   create(data: ICreatePostDto): Promise<Post>;
-  // update(id: string, data: IUpdateUserDto): Promise<User | undefined>;
   delete(id: string): Promise<void>;
-  // show(id: string): Promise<User | undefined>;
 
-  // save(user: User): Promise<User>;
-  findAll_OneUser(user_id: string): Promise<Post[]>;
-  findAll(): Promise<Post[]>;
+  findAllByUser(user_id: string): Promise<Post[] | undefined>;
+  findAll(): Promise<Post[] | undefined>;
   findByid(id: string): Promise<Post | undefined>;
 }
