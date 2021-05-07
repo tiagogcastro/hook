@@ -8,9 +8,9 @@ class UsersController {
   async create(request: Request, response: Response): Promise<Response> {
     const { email, firstname, lastname, password, username } = request.body;
 
-    const createUserService = container.resolve(CreateUserService);
+    const createUser = container.resolve(CreateUserService);
 
-    const {user, token} = await createUserService.execute({
+    const {user, token} = await createUser.execute({
       email,
       firstname,
       lastname,
@@ -24,9 +24,9 @@ class UsersController {
   async index(request: Request, response: Response): Promise<Response> {
     const user_id = request.user.id;
 
-    const listAllUsersService = container.resolve(ListAllUsersService);
+    const listAllUsers = container.resolve(ListAllUsersService);
 
-    const users = await listAllUsersService.execute(user_id);
+    const users = await listAllUsers.execute(user_id);
 
     return response.json(users);
   }

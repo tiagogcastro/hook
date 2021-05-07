@@ -1,7 +1,7 @@
-import DeleteUserService from '@modules/users/services/DeleteUserService';
-import IndexUserService from '@modules/users/services/IndexUserService';
-import ShowUserService from '@modules/users/services/ShowUserProfileService';
-import UpdateUserService from '@modules/users/services/UpdateUserProfileService';
+import DeleteUserProfileService from '@modules/users/services/DeleteUserProfileService';
+import FeedUserService from '@modules/users/services/FeedUserService';
+import ShowUserProfileService from '@modules/users/services/ShowUserProfileService';
+import UpdateUserProfileService from '@modules/users/services/UpdateUserProfileService';
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
@@ -12,9 +12,9 @@ class UsersController {
     } = request.body;
     const user_id = request.user.id;
 
-    const updateUserService = container.resolve(UpdateUserService);
+    const updateUserProfile = container.resolve(UpdateUserProfileService);
 
-    const user = await updateUserService.execute({
+    const user = await updateUserProfile.execute({
       user_id,
       email,
       firstname,
@@ -30,9 +30,9 @@ class UsersController {
 
   async show(request: Request, response: Response): Promise<Response> {
     const { user_id } = request.params;
-    const showUserService = container.resolve(ShowUserService);
+    const showUserProfile = container.resolve(ShowUserProfileService);
 
-    const {user, posts, totalPosts} = await showUserService.execute(user_id);
+    const {user, posts, totalPosts} = await showUserProfile.execute(user_id);
 
     return response.json({user, posts, totalPosts});
   }
@@ -40,17 +40,17 @@ class UsersController {
   async delete(request: Request, response: Response): Promise<Response> {
     const id = request.user.id;
 
-    const deleteUserService = container.resolve(DeleteUserService);
+    const deleteUserProfile = container.resolve(DeleteUserProfileService);
 
-    const user = await deleteUserService.execute(id);
+    const user = await deleteUserProfile.execute(id);
 
     return response.json(user);
   }
 
   async index(request: Request, response: Response): Promise<Response> {
-    const indexUserService = container.resolve(IndexUserService);
+    const feedUser = container.resolve(FeedUserService);
 
-    const posts = await indexUserService.execute();
+    const posts = await feedUser.execute();
 
     return response.json(posts);
   }
