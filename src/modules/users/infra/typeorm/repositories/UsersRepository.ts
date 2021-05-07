@@ -30,15 +30,6 @@ class UsersRepository implements IUsersRepository{
     }
   }
 
-  async show(id: string): Promise<User | undefined> {
-    const user = await this.ormRepository.createQueryBuilder('user')
-    .addSelect(['user.password', 'user.covers'])
-    .where("user.id = :id", { id })
-    .getOne()
-    
-    return user;
-  }
-
   async delete(id: string): Promise<void> {
     await this.ormRepository.delete(id);
   }
@@ -51,9 +42,9 @@ class UsersRepository implements IUsersRepository{
     return user;
   }
 
-  async findByid(id: string): Promise<User | undefined> {
+  async findByid(user_id: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
-      where: {id}
+      where: {id: user_id}
     });
 
     return user;
