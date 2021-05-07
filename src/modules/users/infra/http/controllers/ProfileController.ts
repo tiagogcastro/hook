@@ -7,28 +7,32 @@ import { container } from 'tsyringe';
 
 class UsersController {
   async update(request: Request, response: Response): Promise<Response> {
-    const { email, firstname, lastname, username } = request.body;
-    const id = request.user.id;
+    const { 
+      email, firstname, lastname, username, password, old_password, password_confirmation
+    } = request.body;
+    const user_id = request.user.id;
 
     const updateUserService = container.resolve(UpdateUserService);
 
     const user = await updateUserService.execute({
-      id,
+      user_id,
       email,
       firstname,
       lastname,
       username,
-
+      password,
+      old_password,
+      password_confirmation
     });
 
     return response.json(user);
   }
 
   async show(request: Request, response: Response): Promise<Response> {
-    const {id} = request.params;
+    const { user_id } = request.params;
     const showUserService = container.resolve(ShowUserService);
 
-    const {user, posts, totalPosts} = await showUserService.execute(id);
+    const {user, posts, totalPosts} = await showUserService.execute(user_id);
 
     return response.json({user, posts, totalPosts});
   }
