@@ -1,4 +1,5 @@
 import CreateUserService from '@modules/users/services/CreateUserService';
+import ListAllUsersService from '@modules/users/services/ListAllUsersService';
 
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
@@ -18,6 +19,16 @@ class UsersController {
     });
 
     return response.json({user, token});
+  }
+
+  async index(request: Request, response: Response): Promise<Response> {
+    const user_id = request.user.id;
+
+    const listAllUsersService = container.resolve(ListAllUsersService);
+
+    const users = await listAllUsersService.execute(user_id);
+
+    return response.json(users);
   }
 } 
 

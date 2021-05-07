@@ -10,6 +10,8 @@ const usersController = new UsersController();
 const profileController = new ProfileController();
 
 usersRouter.post('/', usersController.create);
+usersRouter.get('/', ensureAuthenticated, usersController.index);
+
 usersRouter.get('/feed', ensureAuthenticated, profileController.index);
 
 export default usersRouter;

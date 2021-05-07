@@ -2,6 +2,7 @@
 // No typeorm só vai depender dessa interface.
 
 import ICreateUserDto from '../dtos/ICreateUserDTO';
+import IFindAllUsersDTO from '../dtos/IFindAllUsersDTO';
 import IUpdateUserDto from '../dtos/IUpdateUserDTO';
 import User from '../infra/typeorm/entities/User';
 
@@ -16,6 +17,6 @@ export default interface IUsersRepository {
   findByUsername(username: string): Promise<User | undefined>;
   findByid(user_id: string): Promise<User | undefined>;
 
-  findAll(): Promise<User[]>;
+  findAll({except_user_id}: IFindAllUsersDTO): Promise<User[]>;
 
 }

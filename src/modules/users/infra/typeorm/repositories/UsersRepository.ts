@@ -1,7 +1,8 @@
 import ICreateUserDto from '@modules/users/dtos/ICreateUserDTO';
+import IFindAllUsersDTO from '@modules/users/dtos/IFindAllUsersDTO';
 import IUpdateUserDto from '@modules/users/dtos/IUpdateUserDTO';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
-import { getRepository, Repository } from 'typeorm';
+import { getRepository, Not, Repository } from 'typeorm';
 import User from '../entities/User';
 
 // Criando os metodos do user usando typeorm
@@ -61,8 +62,17 @@ class UsersRepository implements IUsersRepository{
     return this.ormRepository.save(user);
   }
 
-  public async findAll(): Promise<User[]> {
-    const users = await this.ormRepository.find();
+  public async findAll({except_user_id}: IFindAllUsersDTO): Promise<User[]> {
+    let users: User[];
+    if(except_user_id) {
+      users = await this.ormRepository.find({
+        where: {
+          id: Not(except_user_id),
+        }
+      });
+    } else {
+      users = await this.ormRepository.find();
+    }
     
     return users;
   }
