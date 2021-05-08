@@ -4,6 +4,7 @@ import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
+import ITokenProvider from '../providers/TokenProvider/models/ITokenProvider';
 import IUsersRepository from '../repositories/IUsersRepository';
 
 interface IRequest {
@@ -24,6 +25,9 @@ class AuthenticateUserService {
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
+
+    @inject('TokenProvider')
+    private tokenProvider: ITokenProvider,
   ) {}
 
   async execute({email, password}: IRequest): Promise<IDataReturn> {
@@ -41,10 +45,9 @@ class AuthenticateUserService {
 
     const { secret } = auth.jwt;
 
-    const token = sign({
-    }, secret, {
+    const token = await this.tokenProvider.generateSignToken({}, secret, {
       subject: user.id,
-      expiresIn: 86400000,
+      expiresIn: '1d'
     });
 
     return {
