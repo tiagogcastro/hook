@@ -3,3 +3,6 @@ yarn-error.log
 
 tmp/**
 !tmp/.gitkeep
+src/modules/friends
+coverage
+features.md
