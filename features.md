@@ -71,7 +71,7 @@
 - O usuário deve conseguir inserir uma nova senha;
 
 **RNF**
-- Usar Ethreal mail para envio de e-mail em desenvolvimento;
+- Usar Ethreal mail para envio de e-mail em desenvolvimento; ✔️
 - Usar Amazon ses para envio de e-mail em produção
 
 
