@@ -1,103 +1,72 @@
-import Anchor from 'components/Anchor';
 import Avatar from 'components/Avatar';
 import Converge from 'components/Converge';
 import Modal, { ModalHandles } from 'components/ModalOverlay/Modal';
 import Switch from 'components/Switch';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef } from 'react';
 import {
-  CgHomeScreen,
-  FaPhotoVideo,
   FiMessageCircle,
+  FiSettings,
   GoTriangleDown,
   IoNotificationsOutline,
-  IoSearchOutline,
-  TiGroup
+  IoSearchOutline
 } from 'react-icons/all';
-import { useLocation } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import {
   Container,
   Encapsulate,
   Information,
-  Navigation,
+  ModalContainer,
   Rearrange,
   Research,
-  ModalContainer,
   UserProfileButton
 } from './styles';
 
-interface AnchorIcons {
-  homeIcon?: boolean;
-  groupIcon?: boolean;
-  videoIcon?: boolean;
-}
-interface HeaderProps {
-  isDefault?: boolean;
-}
-const Header: React.FC<HeaderProps> = ({ isDefault = false }) => {
+type ModalTypes = 'triangleDown' | 'notification' | 'settings' | 'message';
+
+const Header: React.FC = () => {
   const {
     colors: {
       texts: { primary: textColorPrimary },
       icons: { primary: iconColorPrimary }
     }
   } = useTheme();
-  const [isActive, setIsActive] = useState<AnchorIcons>({
-    homeIcon: false,
-    groupIcon: false,
-    videoIcon: false
-  });
-
-  const { pathname } = useLocation();
-  useEffect(() => {
-    switch (pathname) {
-      case '/':
-        setIsActive({
-          homeIcon: true
-        });
-        break;
-
-      case '/groups':
-        setIsActive({
-          groupIcon: true
-        });
-        break;
-
-      case '/watch':
-        setIsActive({
-          videoIcon: true
-        });
-        break;
-      default:
-        setIsActive({});
-        break;
-    }
-  }, [pathname]);
 
   const messageModalRef = useRef<ModalHandles>(null);
   const notificationModalRef = useRef<ModalHandles>(null);
   const triangleDownModalRef = useRef<ModalHandles>(null);
+  const settingsModalRef = useRef<ModalHandles>(null);
 
-  const handleOpenMessageModal = useCallback(() => {
-    triangleDownModalRef.current?.closeModal();
-    notificationModalRef.current?.closeModal();
-    messageModalRef.current?.openModal();
-  }, []);
-
-  const handleOpenNotificationModal = useCallback(() => {
-    triangleDownModalRef.current?.closeModal();
+  const handleOpenModal = useCallback((type: ModalTypes) => {
     messageModalRef.current?.closeModal();
-    notificationModalRef.current?.openModal();
-  }, []);
-
-  const handleOpenTriangleDownModal = useCallback(() => {
     notificationModalRef.current?.closeModal();
-    messageModalRef.current?.closeModal();
-    triangleDownModalRef.current?.openModal();
+    triangleDownModalRef.current?.closeModal();
+    settingsModalRef.current?.closeModal();
+
+    switch (type) {
+      case 'message':
+        messageModalRef.current?.openModal();
+
+        break;
+      case 'notification':
+        notificationModalRef.current?.openModal();
+
+        break;
+      case 'triangleDown':
+        triangleDownModalRef.current?.openModal();
+
+        break;
+      case 'settings':
+        settingsModalRef.current?.openModal();
+
+        break;
+      default:
+        break;
+    }
   }, []);
 
   return (
     <Container>
-      <Converge isDefault={isDefault}>
+      <Converge>
         <Rearrange>
           <Research>
             <button type="submit">
@@ -105,44 +74,6 @@ const Header: React.FC<HeaderProps> = ({ isDefault = false }) => {
             </button>
             <input type="search" />
           </Research>
-          <Navigation isDefault={isDefault}>
-            <ul>
-              <li>
-                <Anchor
-                  to="/"
-                  active={isActive.homeIcon}
-                  icon={{
-                    component: CgHomeScreen,
-                    color: iconColorPrimary,
-                    size: 30
-                  }}
-                />
-              </li>
-
-              <li>
-                <Anchor
-                  to="/groups"
-                  active={isActive.groupIcon}
-                  icon={{
-                    component: TiGroup,
-                    color: iconColorPrimary,
-                    size: 30
-                  }}
-                />
-              </li>
-              <li>
-                <Anchor
-                  to="/watch"
-                  active={isActive.videoIcon}
-                  icon={{
-                    component: FaPhotoVideo,
-                    color: iconColorPrimary,
-                    size: 30
-                  }}
-                />
-              </li>
-            </ul>
-          </Navigation>
 
           <Information>
             <UserProfileButton to="/profile">
@@ -153,20 +84,38 @@ const Header: React.FC<HeaderProps> = ({ isDefault = false }) => {
             <Encapsulate>
               <ModalContainer>
                 <Modal ref={messageModalRef}>1</Modal>
-                <button type="button" onClick={handleOpenMessageModal}>
+                <button
+                  type="button"
+                  onClick={() => handleOpenModal('message')}
+                >
                   <FiMessageCircle color={textColorPrimary} size={20} />
                 </button>
               </ModalContainer>
               <ModalContainer>
                 <Modal ref={notificationModalRef}>2</Modal>
-                <button type="button" onClick={handleOpenNotificationModal}>
+                <button
+                  type="button"
+                  onClick={() => handleOpenModal('notification')}
+                >
                   <IoNotificationsOutline color={textColorPrimary} size={20} />
                 </button>
               </ModalContainer>
               <ModalContainer>
                 <Modal ref={triangleDownModalRef}>3</Modal>
-                <button type="button" onClick={handleOpenTriangleDownModal}>
+                <button
+                  type="button"
+                  onClick={() => handleOpenModal('triangleDown')}
+                >
                   <GoTriangleDown color={textColorPrimary} size={20} />
+                </button>
+              </ModalContainer>
+              <ModalContainer>
+                <Modal ref={settingsModalRef}>4</Modal>
+                <button
+                  type="button"
+                  onClick={() => handleOpenModal('settings')}
+                >
+                  <FiSettings color={textColorPrimary} size={15} />
                 </button>
               </ModalContainer>
             </Encapsulate>
