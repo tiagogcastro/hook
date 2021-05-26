@@ -1,14 +1,8 @@
 import React from 'react';
 import { Container } from './styles';
 
-interface ConvergeProps {
-  isDefault?: boolean;
-}
-const Converge: React.FC<ConvergeProps> = ({
-  children,
-  isDefault
-}): JSX.Element => {
-  return <Container isDefault={!!isDefault}>{children}</Container>;
+const Converge: React.FC = ({ children }): JSX.Element => {
+  return <Container>{children}</Container>;
 };
 
 export default Converge;
