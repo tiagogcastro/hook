@@ -1,14 +1,18 @@
+import AccessibilityGroup from 'components/AccessibilityGroup';
 import Header from 'components/Header';
 import React from 'react';
-import { Body, Container } from './styles';
+import { Container, ContentContainer, Content } from './styles';
 
 const Home: React.FC = (): JSX.Element => {
   return (
     <Container>
-      <Header isDefault />
-      <Body>
-        <div style={{ height: '1000vh' }} />
-      </Body>
+      <Header />
+      <ContentContainer>
+        <AccessibilityGroup />
+        <Content>
+          <div style={{ height: '1000vh' }} />
+        </Content>
+      </ContentContainer>
     </Container>
   );
 };
