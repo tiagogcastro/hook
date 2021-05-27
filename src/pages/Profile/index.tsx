@@ -1,16 +1,20 @@
+import AccessibilityGroup from 'components/AccessibilityGroup';
 import Header from 'components/Header';
 import React from 'react';
-import { Body, Container } from './styles';
+import { Container, ContentContainer, Content } from './styles';
 
-const Profile: React.FC = (): JSX.Element => {
+const Home: React.FC = (): JSX.Element => {
   return (
     <Container>
       <Header />
-      <Body>
-        <div style={{ height: '1000vh' }} />
-      </Body>
+      <ContentContainer>
+        <AccessibilityGroup />
+        <Content>
+          <div style={{ height: '1000vh' }} />
+        </Content>
+      </ContentContainer>
     </Container>
   );
 };
 
-export default Profile;
+export default Home;
