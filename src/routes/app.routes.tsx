@@ -1,20 +1,18 @@
-import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-
 import Home from 'pages/Home';
-import Watch from 'pages/Watch';
-import Profile from 'pages/Profile';
 import Groups from 'pages/Groups';
-import PrivateRoute from './private.routes';
+import Profile from 'pages/Profile';
+import Watch from 'pages/Watch';
+import React from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const AppRoutes: React.FC = (): JSX.Element => {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Home} />
+        <Route path="/groups" component={Groups} />
         <Route path="/profile" component={Profile} />
-        <PrivateRoute path="/watch" component={Watch} />
-        <PrivateRoute path="/groups" component={Groups} />
+        <Route path="/watch" component={Watch} />
       </Switch>
     </BrowserRouter>
   );
