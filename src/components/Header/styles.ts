@@ -1,9 +1,6 @@
 import { Link as LinkReactDOM } from 'react-router-dom';
 import styled, { css } from 'styled-components';
 
-interface NavigationProps {
-  isDefault: boolean;
-}
 const cssOverlay = css`
   position: relative;
   z-index: 2;
@@ -13,7 +10,11 @@ const cssFlex = css`
   align-items: center;
 `;
 export const Container = styled.header`
-  height: 100%;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  height: 90px;
   background-color: ${props => props.theme.colors.background.secondary};
   color: ${props => props.theme.colors.texts.primary};
 `;
@@ -41,74 +42,6 @@ export const Research = styled.div`
     }
   }
 `;
-export const Navigation = styled.nav<NavigationProps>`
-  ${cssOverlay}
-  ${cssFlex}
-  background-color: ${props => props.theme.colors.background.secondary};
-  > ul {
-    ${cssFlex}
-    list-style: none;
-    width: 100%;
-    flex-direction: row;
-    li {
-      padding: 10px 0;
-      > a {
-        ${cssFlex}
-        justify-content: center;
-        padding: 10px;
-        margin: 0 15px;
-      }
-    }
-  }
-
-  ${props =>
-    props.isDefault
-      ? css`
-          height: 100%;
-          width: 80px;
-          position: fixed;
-          left: 0;
-          bottom: 0;
-          > ul {
-            ${cssFlex}
-            flex-direction: column;
-          }
-          @media screen and (max-width: 900px) {
-            width: 100%;
-            height: unset;
-            > ul {
-              justify-content: space-around;
-              flex-direction: row;
-            }
-            * {
-              height: 100%;
-            }
-          }
-        `
-      : css`
-          background-color: transparent;
-          @media screen and (max-width: 1200px) {
-            background-color: ${props.theme.colors.background.secondary};
-            position: fixed;
-            width: 100%;
-            max-width: 900px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            right: 0;
-            bottom: 0;
-            width: 100%;
-            height: unset;
-            > ul {
-              justify-content: space-around;
-              flex-direction: row;
-            }
-            * {
-              height: 100%;
-            }
-          }
-        `}
-`;
-
 export const Information = styled.div`
   ${cssFlex}
 `;
@@ -142,6 +75,10 @@ export const Encapsulate = styled.div`
 
 export const ModalContainer = styled.div`
   position: relative;
+  @media screen and (max-width: 600px) {
+    position: unset;
+  }
+
   > button {
     ${cssOverlay}
     ${cssFlex}
