@@ -18,7 +18,7 @@ const styles = {
       justify-content: space-around;
       li {
         box-shadow: 0 0 5px
-          ${props => shade(0.1, props.theme.colors.background.secondary)};
+          ${props => shade(0.3, props.theme.colors.background.secondary)};
       }
     }
   `,
@@ -28,14 +28,14 @@ const styles = {
       li {
         margin-top: 20px;
         box-shadow: 0 0 5px
-          ${props => shade(0.5, props.theme.colors.background.secondary)};
+          ${props => shade(0.3, props.theme.colors.background.secondary)};
       }
     }
   `
 };
 const cssOverlay = css`
   position: relative;
-  z-index: 2;
+  z-index: 4;
 `;
 const cssFlex = css`
   display: flex;
@@ -70,9 +70,6 @@ export const Container = styled.nav<ContainerProps>`
     background-color: ${props => props.theme.colors.background.secondary};
     position: fixed;
     width: 100%;
-    max-width: 900px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     right: 0;
     bottom: 0;
     width: 100%;
