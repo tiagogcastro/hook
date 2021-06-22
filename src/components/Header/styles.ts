@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 
 const cssOverlay = css`
   position: relative;
-  z-index: 2;
+  z-index: 3;
 `;
 const cssFlex = css`
   display: flex;
