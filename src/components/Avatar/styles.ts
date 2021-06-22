@@ -6,6 +6,7 @@ interface ContainerProps {
 export const Container = styled.div<ContainerProps>`
   position: relative;
   z-index: 3;
+  flex-shrink: 0;
   background-color: ${props => props.theme.colors.avatar};
   border-radius: 50rem;
   width: ${props => props.size}px;
