@@ -13,7 +13,7 @@ class UsersController {
       firstname,
       lastname,
       password,
-      username
+      username,
     });
 
     return response.json(user);

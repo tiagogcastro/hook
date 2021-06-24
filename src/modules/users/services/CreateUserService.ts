@@ -12,21 +12,36 @@ interface IRequest {
 }
 @injectable()
 class CreateUserService {
-  constructor (
+  constructor(
     @inject('UsersRepository')
-    private usersRepository: IUsersRepository
+    private usersRepository: IUsersRepository,
   ) {}
-  async execute({email, firstname, lastname, password, username}: IRequest): Promise<User> {
+
+  async execute({
+    email,
+    firstname,
+    lastname,
+    password,
+    username,
+  }: IRequest): Promise<User> {
     const existEmail = await this.usersRepository.findByEmail(email);
 
-    if(existEmail) {
-      throw new AppError('Este e-mail já existe. Por favor, informe outro', ' 401 unauthorized', 401);
+    if (existEmail) {
+      throw new AppError(
+        'Este e-mail já existe. Por favor, informe outro',
+        ' 401 unauthorized',
+        401,
+      );
     }
 
     const existUsername = await this.usersRepository.findByUsername(username);
 
-    if(existUsername) {
-      throw new AppError('Este username já existe. Por favor, informe outro', ' 401 unauthorized', 401);
+    if (existUsername) {
+      throw new AppError(
+        'Este username já existe. Por favor, informe outro',
+        ' 401 unauthorized',
+        401,
+      );
     }
 
     const user = await this.usersRepository.create({
@@ -34,10 +49,10 @@ class CreateUserService {
       firstname,
       lastname,
       password,
-      username: `@${username}`
+      username: `@${username}`,
     });
 
-    return user
+    return user;
   }
 }
 

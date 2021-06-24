@@ -1,18 +1,16 @@
-import ICreateUserDto from '@modules/users/dtos/ICreateUserDTO';
+import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
 import { getRepository, Repository } from 'typeorm';
 import User from '../entities/User';
 
-// Criando os metodos do user usando typeorm
-
-class UsersRepository implements IUsersRepository{
-  private ormRepository: Repository<User>
+class UsersRepository implements IUsersRepository {
+  private ormRepository: Repository<User>;
 
   constructor() {
-    this.ormRepository = getRepository(User)
+    this.ormRepository = getRepository(User);
   }
 
-  async create(userData: ICreateUserDto): Promise<User> {
+  async create(userData: ICreateUserDTO): Promise<User> {
     const user = this.ormRepository.create(userData);
 
     await this.ormRepository.save(user);
@@ -22,7 +20,7 @@ class UsersRepository implements IUsersRepository{
 
   async findByEmail(email: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
-      where: {email}
+      where: { email },
     });
 
     return user;
@@ -30,7 +28,7 @@ class UsersRepository implements IUsersRepository{
 
   async findByid(id: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
-      where: {id}
+      where: { id },
     });
 
     return user;
@@ -38,11 +36,10 @@ class UsersRepository implements IUsersRepository{
 
   async findByUsername(username: string): Promise<User | undefined> {
     const user = await this.ormRepository.findOne({
-      where: {username: `@${username}`}
+      where: { username: `@${username}` },
     });
     return user;
   }
-
 }
 
 export default UsersRepository;

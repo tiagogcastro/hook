@@ -1,5 +1,4 @@
-// Cria as tipagens do metódo create para usar no repositories do typeorm e do ./repositories 
-export default interface ICreateUserDto {
+export default interface ICreateUserDTO {
   email: string;
   firstname: string;
   lastname: string;
