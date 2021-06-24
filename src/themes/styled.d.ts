@@ -6,6 +6,7 @@ declare module 'styled-components' {
     colors: {
       texts: {
         primary: string;
+        secondary: string;
       };
       inputs: {
         primary: string;
@@ -14,12 +15,21 @@ declare module 'styled-components' {
         primary: string;
         secondary: string;
         ternary: string;
+        quaternary: string;
+        quinary: string;
       };
       avatar: string;
       hover: {
         primary: string;
       };
-
+      groups: {
+        globals: {
+          primary: string;
+        };
+        shadow: {
+          primary: string;
+        };
+      };
       searchbar: {
         primary: string;
       };
@@ -31,6 +41,9 @@ declare module 'styled-components' {
       icons: {
         primary: string;
         ternary: string;
+        quaternary: string;
+        quinary: string;
+        senary: string;
         background: {
           primary: string;
         };

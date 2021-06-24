@@ -15,4 +15,20 @@ export const Content = styled.div`
   flex: 1;
   overflow-y: auto;
   overflow-x: hidden;
+  * {
+    color: #fff;
+  }
+  .swiper-container {
+    .swiper-button-prev::after,
+    .swiper-button-next::after {
+      font-size: 20px;
+    }
+    .swiper-button-disabled {
+      display: none !important;
+    }
+    .swiper-slide {
+      border: 1px solid #000;
+      height: 100px;
+    }
+  }
 `;

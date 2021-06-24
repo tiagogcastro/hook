@@ -5,7 +5,8 @@ export default {
   title: 'dark',
   colors: {
     texts: {
-      primary: '#fff'
+      primary: '#fff',
+      secondary: '#555A62'
     },
     inputs: {
       primary: '#30343b'
@@ -13,11 +14,21 @@ export default {
     background: {
       primary: '#16181E',
       secondary: '#101115',
-      ternary: shade(0.5, '#101115')
+      ternary: shade(0.5, '#101115'),
+      quaternary: '#fff',
+      quinary: '#131419'
     },
     avatar: tint(0.01, '#0a0b0c'),
     hover: {
       primary: '#0a0b0c'
+    },
+    groups: {
+      globals: {
+        primary: shade(0.4, '#101115')
+      },
+      shadow: {
+        primary: shade(0.5, '#101115')
+      }
     },
     searchbar: {
       primary: '#30343b'
@@ -29,6 +40,9 @@ export default {
     icons: {
       primary: '#313541',
       ternary: '#00ffe7',
+      quaternary: '#f8f',
+      quinary: '#739DE5',
+      senary: '#F28465',
       background: {
         primary: '#313440'
       }

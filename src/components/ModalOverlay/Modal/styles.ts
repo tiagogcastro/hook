@@ -15,7 +15,7 @@ export const Container = styled.div<ContainerProps>`
     width: 95%;
     max-width: 600px;
   }
-  z-index: 3;
+  z-index: 4;
   padding: 40px 50px 100px 18px;
   background-color: ${props => props.theme.colors.background.ternary};
   ${props =>

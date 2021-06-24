@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Container = styled.div`
   flex-shrink: 0;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   user-select: none;
   width: 50px;
 `;

@@ -9,6 +9,7 @@ export const Container = styled.div<ContainerProps>`
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 2;
   ${props =>
     !props.isVisible &&
     css`
