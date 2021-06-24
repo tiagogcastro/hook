@@ -10,7 +10,7 @@ class UsersController {
 
     const createUser = container.resolve(CreateUserService);
 
-    const {user, token} = await createUser.execute({
+    const { user, token } = await createUser.execute({
       email,
       firstname,
       lastname,
@@ -18,7 +18,7 @@ class UsersController {
       username,
     });
 
-    return response.json({user, token});
+    return response.json({ user, token });
   }
 
   async index(request: Request, response: Response): Promise<Response> {
@@ -30,6 +30,6 @@ class UsersController {
 
     return response.json(users);
   }
-} 
+}
 
 export default UsersController;

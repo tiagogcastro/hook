@@ -8,6 +8,7 @@ class IndexUserService {
     @inject('PostsRepository')
     private postsRepository: IPostsRepository,
   ) {}
+
   async execute(): Promise<Post[] | undefined> {
     const posts = await this.postsRepository.findAll();
     return posts;

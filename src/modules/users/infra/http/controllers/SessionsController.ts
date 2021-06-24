@@ -4,18 +4,18 @@ import { container } from 'tsyringe';
 
 class SessionsController {
   async login(request: Request, response: Response): Promise<Response> {
-    const {email, password} = request.body;
+    const { email, password } = request.body;
 
     const authenticate = container.resolve(AuthenticateUserService);
 
-    const {user, token} = await authenticate.execute({
+    const { user, token } = await authenticate.execute({
       email,
-      password
+      password,
     });
 
     return response.json({
       user,
-      token
+      token,
     });
   }
 }

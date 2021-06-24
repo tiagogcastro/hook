@@ -1,5 +1,4 @@
 import ICreateUserDTO from '@modules/users/dtos/ICreateUserDTO';
-import ICreateUserDto from '@modules/users/dtos/ICreateUserDTO';
 import IFindAllUsersDTO from '@modules/users/dtos/IFindAllUsersDTO';
 import IUpdateUserDto from '@modules/users/dtos/IUpdateUserDTO';
 import IUsersRepository from '@modules/users/repositories/IUsersRepository';
@@ -21,13 +20,18 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  async update(id: string, userData: IUpdateUserDto): Promise<User | undefined> {
+  async update(
+    id: string,
+    userData: IUpdateUserDto,
+  ): Promise<User | undefined> {
     const user = await this.ormRepository.update(id, userData);
 
-    if(user.affected === 1) {
+    if (user.affected === 1) {
       const userUpdated = await this.ormRepository.findOne(id);
-      return userUpdated
+
+      return userUpdated;
     }
+    return undefined;
   }
 
   async delete(id: string): Promise<void> {
@@ -57,22 +61,22 @@ class UsersRepository implements IUsersRepository {
     return user;
   }
 
-  public async save(user: User) : Promise<User> {
+  public async save(user: User): Promise<User> {
     return this.ormRepository.save(user);
   }
 
-  public async findAll({except_user_id}: IFindAllUsersDTO): Promise<User[]> {
+  public async findAll({ except_user_id }: IFindAllUsersDTO): Promise<User[]> {
     let users: User[];
-    if(except_user_id) {
+    if (except_user_id) {
       users = await this.ormRepository.find({
         where: {
           id: Not(except_user_id),
-        }
+        },
       });
     } else {
       users = await this.ormRepository.find();
     }
-    
+
     return users;
   }
 }

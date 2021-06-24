@@ -4,5 +4,5 @@ import IMailProvider from './models/IMailProvider';
 
 container.registerSingleton<IMailProvider>(
   'MailProvider',
-  EtherealMailProvider
+  EtherealMailProvider,
 );

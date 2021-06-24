@@ -1,13 +1,13 @@
 import 'reflect-metadata';
-import express, { Request, Response, NextFunction} from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import 'express-async-errors';
 
+import AppError from '@shared/errors';
 import routes from './routes';
 // import uploadConfig from '@config/upload';
 
 import '@shared/infra/typeorm';
-import AppError from '@shared/errors';
 import '@shared/container';
 
 const app = express();
@@ -18,8 +18,8 @@ app.use(express.json());
 // app.use('/files', express.static(uploadConfig.directory));
 app.use(routes);
 
-app.use((err: Error, request: Request, response: Response, next: NextFunction) => {
-  if(err instanceof AppError) {
+app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
+  if (err instanceof AppError) {
     return response.status(err.statusCode).json({
       status: 'error',
       message: err.message,
@@ -29,11 +29,11 @@ app.use((err: Error, request: Request, response: Response, next: NextFunction) =
   return response.status(500).json({
     status: 'error',
     name: err.stack,
-    message: 'Internal server error.'
+    message: 'Internal server error.',
   });
 });
 
 const port = 3333;
 app.listen(port, () => {
-  console.log(`Backend server Hook stated on port ${port}`)
+  console.log(`hooks server started on port ${port}`);
 });

@@ -3,11 +3,11 @@ import IParseMailTemplateDTO from '@shared/container/providers/MailTemplateProvi
 type IMailContact = {
   name: string;
   email: string;
-}
+};
 
 export default interface ISendMailDTO {
-  to: IMailContact
+  to: IMailContact;
   from?: IMailContact;
   subject: string;
-  templateData: IParseMailTemplateDTO
+  templateData: IParseMailTemplateDTO;
 }

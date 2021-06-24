@@ -4,5 +4,5 @@ import IMailTemplateProvider from './models/IMailTemplateProvider';
 
 container.registerSingleton<IMailTemplateProvider>(
   'MailTemplateProvider',
-  HandlebarsMailTemplateProvider
+  HandlebarsMailTemplateProvider,
 );

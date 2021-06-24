@@ -1,4 +1,4 @@
-export default class IUpdateUserDto {
+export default interface IUpdateUserDto {
   email: string;
   firstname: string;
   lastname: string;

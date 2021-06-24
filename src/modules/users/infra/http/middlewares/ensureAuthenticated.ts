@@ -3,17 +3,21 @@ import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import authConfig from '@config/auth';
 
-interface TokenPayload {
+interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
 }
 
-export default function ensureAuthentication(request: Request, response: Response, next: NextFunction): void {
+export default function ensureAuthentication(
+  request: Request,
+  response: Response,
+  next: NextFunction,
+): void {
   const authHeader = request.headers.authorization;
 
-  if(!authHeader) {
-    throw new AppError('JWT token is missing', '401 unauthorized' , 401);
+  if (!authHeader) {
+    throw new AppError('JWT token is missing', '401 unauthorized', 401);
   }
 
   const [, token] = authHeader.split(' ');
@@ -21,16 +25,14 @@ export default function ensureAuthentication(request: Request, response: Respons
   try {
     const decoded = verify(token, authConfig.jwt.secret);
 
-    const { sub } = decoded as TokenPayload;
+    const { sub } = decoded as ITokenPayload;
 
     request.user = {
       id: sub,
-    }
+    };
 
     return next();
-
   } catch {
     throw new AppError('Token JWT inválido.', '401 unauthorized', 401);
   }
-    
 }
