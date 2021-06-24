@@ -7,8 +7,14 @@ import { container } from 'tsyringe';
 
 class UsersController {
   async update(request: Request, response: Response): Promise<Response> {
-    const { 
-      email, firstname, lastname, username, password, old_password, password_confirmation
+    const {
+      email,
+      firstname,
+      lastname,
+      username,
+      password,
+      old_password,
+      password_confirmation,
     } = request.body;
     const user_id = request.user.id;
 
@@ -22,7 +28,7 @@ class UsersController {
       username,
       password,
       old_password,
-      password_confirmation
+      password_confirmation,
     });
 
     return response.json(user);
@@ -32,13 +38,13 @@ class UsersController {
     const { user_id } = request.params;
     const showUserProfile = container.resolve(ShowUserProfileService);
 
-    const {user, posts, totalPosts} = await showUserProfile.execute(user_id);
+    const { user, posts, totalPosts } = await showUserProfile.execute(user_id);
 
-    return response.json({user, posts, totalPosts});
+    return response.json({ user, posts, totalPosts });
   }
 
   async delete(request: Request, response: Response): Promise<Response> {
-    const id = request.user.id;
+    const { id } = request.user;
 
     const deleteUserProfile = container.resolve(DeleteUserProfileService);
 
@@ -54,7 +60,6 @@ class UsersController {
 
     return response.json(posts);
   }
-  
-} 
+}
 
 export default UsersController;

@@ -1,11 +1,11 @@
-import { 
-  Column, 
-  CreateDateColumn, 
-  Entity, 
-  JoinColumn, 
-  ManyToOne, 
-  PrimaryGeneratedColumn, 
-  UpdateDateColumn 
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 
 import User from '@modules/users/infra/typeorm/entities/User';
@@ -21,19 +21,19 @@ class Post {
 
   @ManyToOne(() => User)
   @JoinColumn({
-    name: 'user_id'
+    name: 'user_id',
   })
   user: User;
-  
-  @Column()
-  description: string
 
-  @Column("varchar", { array: true })
+  @Column()
+  description: string;
+
+  @Column('varchar', { array: true })
   content: string[];
 
   @CreateDateColumn()
   created_at: string;
-  
+
   @UpdateDateColumn()
   updated_at: string;
 

@@ -1,7 +1,22 @@
-node_modules
 yarn-error.log
+
+/node_modules
+/build
+
+src/modules/friends
+
+coverage
+
+.env
+.env.production
+.env.development
+
+ormconfig.development.json
+ormconfig.production.json
+ormconfig.json
 
 tmp/**
 !tmp/.gitkeep
-src/modules/friends
-coverage
+!tmp/uploads/
+!tmp/uploads/.gitkeep
+

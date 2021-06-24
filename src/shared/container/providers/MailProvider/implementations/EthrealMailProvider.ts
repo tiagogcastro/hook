@@ -7,9 +7,10 @@ import IMailProvider from '../models/IMailProvider';
 @injectable()
 class EtherealMailProvider implements IMailProvider {
   private client: Transporter;
+
   constructor(
     @inject('MailProvider')
-    private mailTemplateProvider: IMailTemplateProvider
+    private mailTemplateProvider: IMailTemplateProvider,
   ) {
     nodemailer.createTestAccount().then(account => {
       const transporter = nodemailer.createTransport({
@@ -18,29 +19,35 @@ class EtherealMailProvider implements IMailProvider {
         secure: account.smtp.secure,
         auth: {
           user: account.user,
-          pass: account.pass
-        }
+          pass: account.pass,
+        },
       });
 
       this.client = transporter;
     });
   }
-  async sendMail({to, subject, from, templateData}: ISendMailDTO): Promise<void> {
+
+  async sendMail({
+    to,
+    subject,
+    from,
+    templateData,
+  }: ISendMailDTO): Promise<void> {
     const message = await this.client.sendMail({
       to: {
         name: to.name,
-        address: to.email
+        address: to.email,
       },
       from: {
         name: from?.name || 'Equipe Hook',
-        address: from?.email || 'hook.empresa@gmail.com'
+        address: from?.email || 'hook.empresa@gmail.com',
       },
       subject,
       html: await this.mailTemplateProvider.parse(templateData),
     });
 
-    console.log("Message sent: %s", message.messageId);
-    console.log("Preview URL: %s", nodemailer.getTestMessageUrl(message));
+    console.log('Message sent: %s', message.messageId);
+    console.log('Preview URL: %s', nodemailer.getTestMessageUrl(message));
   }
 }
 

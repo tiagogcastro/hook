@@ -8,11 +8,12 @@ class ListAllUsersService {
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
   ) {}
+
   async execute(user_id: string): Promise<User[] | undefined> {
     const users = await this.usersRepository.findAll({
       except_user_id: user_id,
     });
-    
+
     return users;
   }
 }

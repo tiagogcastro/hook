@@ -16,35 +16,49 @@ interface IRequest {
   username: string;
 }
 
-interface IDataReturn {
+interface IResponse {
   user: User;
   token: string;
 }
 
 @injectable()
 class CreateUserService {
-  constructor (
+  constructor(
     @inject('UsersRepository')
     private usersRepository: IUsersRepository,
 
     @inject('HashProvider')
     private hashProvider: IHashProvider,
-    
+
     @inject('TokenProvider')
     private tokenProvider: ITokenProvider,
-
   ) {}
-  async execute({email, firstname, lastname, password, username}: IRequest): Promise<IDataReturn> {
+
+  async execute({
+    email,
+    firstname,
+    lastname,
+    password,
+    username,
+  }: IRequest): Promise<IResponse> {
     const existEmail = await this.usersRepository.findByEmail(email);
 
-    if(existEmail) {
-      throw new AppError('Este e-mail já existe. Por favor, informe outro', '401 unauthorized', 401);
+    if (existEmail) {
+      throw new AppError(
+        'Este e-mail já existe. Por favor, informe outro',
+        '401 unauthorized',
+        401,
+      );
     }
 
     const existUsername = await this.usersRepository.findByUsername(username);
 
-    if(existUsername) {
-      throw new AppError('Este username já existe. Por favor, informe outro', '401 unauthorized', 401);
+    if (existUsername) {
+      throw new AppError(
+        'Este username já existe. Por favor, informe outro',
+        '401 unauthorized',
+        401,
+      );
     }
 
     const hashedPassword = await this.hashProvider.generateHash(password);
@@ -54,20 +68,20 @@ class CreateUserService {
       firstname,
       lastname,
       password: hashedPassword,
-      username: `@${username}`
+      username: `@${username}`,
     });
 
     const { secret } = auth.jwt;
 
     const token = await this.tokenProvider.generateSignToken({}, secret, {
       subject: user.id,
-      expiresIn: '1d'
+      expiresIn: '1d',
     });
 
     return {
       user,
-      token
-    }
+      token,
+    };
   }
 }
 

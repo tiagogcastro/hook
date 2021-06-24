@@ -1,9 +1,9 @@
-import { 
-  Column, 
+import {
+  Column,
   CreateDateColumn,
-  Entity, 
-  PrimaryGeneratedColumn, 
-  UpdateDateColumn 
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { v4 as uuid } from 'uuid';
 
@@ -14,7 +14,7 @@ class User {
 
   @Column()
   firstname: string;
-  
+
   @Column()
   lastname: string;
 
@@ -26,21 +26,21 @@ class User {
 
   @Column()
   password: string;
-  
+
   @Column()
   user_avatar: string;
-  
-  @Column("varchar", { array: true})
+
+  @Column('varchar', { array: true })
   covers: string[];
-  
+
   @CreateDateColumn()
   created_at: Date;
-  
+
   @UpdateDateColumn()
   updated_at: Date;
 
   constructor() {
-    if(!this.id) {
+    if (!this.id) {
       this.id = uuid();
     }
   }

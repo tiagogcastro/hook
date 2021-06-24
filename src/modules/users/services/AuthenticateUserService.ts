@@ -1,6 +1,5 @@
 import auth from '@config/auth';
 import AppError from '@shared/errors';
-import { sign } from 'jsonwebtoken';
 import { inject, injectable } from 'tsyringe';
 import User from '../infra/typeorm/entities/User';
 import IHashProvider from '../providers/HashProvider/models/IHashProvider';
@@ -30,30 +29,33 @@ class AuthenticateUserService {
     private tokenProvider: ITokenProvider,
   ) {}
 
-  async execute({email, password}: IRequest): Promise<IDataReturn> {
+  async execute({ email, password }: IRequest): Promise<IDataReturn> {
     const user = await this.usersRepository.findByEmail(email);
-    
-    if(!user) {
+
+    if (!user) {
       throw new AppError('Está conta não existe.', '401 unauthorized', 401);
     }
 
-    const passwordMatched = await this.hashProvider.compareHash(password, user.password);
+    const passwordMatched = await this.hashProvider.compareHash(
+      password,
+      user.password,
+    );
 
-    if(!passwordMatched) {
-      throw new AppError('Senha ou e-mail incorreto', '401 unauthorized', 401); 
+    if (!passwordMatched) {
+      throw new AppError('Senha ou e-mail incorreto', '401 unauthorized', 401);
     }
 
     const { secret } = auth.jwt;
 
     const token = await this.tokenProvider.generateSignToken({}, secret, {
       subject: user.id,
-      expiresIn: '1d'
+      expiresIn: '1d',
     });
 
     return {
       user,
-      token
-    }
+      token,
+    };
   }
 }
 
