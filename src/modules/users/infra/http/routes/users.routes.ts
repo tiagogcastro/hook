@@ -1,17 +1,17 @@
 import { Router } from 'express';
-// import multer from 'multer';
-// import uploadConfig from '@config/upload';
 
 import UsersController from '../controllers/UsersController';
-
-// import ensureAuthenticated from '@modules/users/infra/http/middlewares/ensureAuthenticated';
-// import UserAvatarController from '../controllers/UserAvatarController';
+import ProfileController from '../controllers/ProfileController';
+import ensureAuthenticated from '../middlewares/ensureAuthenticated';
 
 const usersRouter = Router();
+
 const usersController = new UsersController();
-// const userAvatarController = new UserAvatarController();
-// const upload = multer(uploadConfig);
+const profileController = new ProfileController();
 
 usersRouter.post('/', usersController.create);
+usersRouter.get('/', ensureAuthenticated, usersController.index);
+
+usersRouter.get('/feed', ensureAuthenticated, profileController.index);
 
 export default usersRouter;

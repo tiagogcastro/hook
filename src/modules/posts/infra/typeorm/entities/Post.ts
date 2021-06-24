@@ -8,8 +8,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-import User from '../../../../users/infra/typeorm/entities/User';
-// import User from '@modules/users/infra/typeorm/entities/User';
+import User from '@modules/users/infra/typeorm/entities/User';
+import { v4 as uuid } from 'uuid';
 
 @Entity('posts')
 class Post {
@@ -36,6 +36,12 @@ class Post {
 
   @UpdateDateColumn()
   updated_at: string;
+
+  constructor() {
+    if(!this.id) {
+      this.id = uuid()
+    }
+  }
 }
 
 export default Post;
