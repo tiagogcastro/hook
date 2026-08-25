@@ -1,0 +1,66 @@
+import { shade, tint } from 'polished';
+import { DefaultTheme } from 'styled-components';
+
+export default {
+  title: 'dark',
+  colors: {
+    texts: {
+      primary: '#fff',
+      secondary: '#555A62'
+    },
+    inputs: {
+      primary: '#30343b'
+    },
+    background: {
+      primary: '#16181E',
+      secondary: '#101115',
+      ternary: shade(0.5, '#101115'),
+      quaternary: '#fff',
+      quinary: '#131419'
+    },
+    avatar: tint(0.01, '#0a0b0c'),
+    hover: {
+      primary: '#0a0b0c'
+    },
+    groups: {
+      globals: {
+        primary: shade(0.4, '#101115')
+      },
+      shadow: {
+        primary: shade(0.5, '#101115')
+      }
+    },
+    searchbar: {
+      primary: '#30343b'
+    },
+    scrollbar: {
+      primary: '#14151A',
+      secondary: '#0E1014'
+    },
+    icons: {
+      primary: '#313541',
+      ternary: '#00ffe7',
+      quaternary: '#f8f',
+      quinary: '#739DE5',
+      senary: '#F28465',
+      background: {
+        primary: '#313440'
+      }
+    },
+    switch: {
+      shadow: {
+        primary: '#00ffe7',
+        secondary: '#000',
+        ternary: '#808080'
+      },
+      background: {
+        primary: '#0F1118'
+      },
+      border: {
+        primary: '#00ffe7',
+        secondary: '#0F1118',
+        ternary: '#0F1118'
+      }
+    }
+  }
+} as DefaultTheme;
